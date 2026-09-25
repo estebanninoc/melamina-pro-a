@@ -33,13 +33,18 @@
   nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:10px}
   .logo{display:flex;align-items:center;gap:9px;font-family:var(--disp);font-weight:900;
         font-size:1.12rem;letter-spacing:-.04em;min-width:0}
-  .logo img{width:30px;height:30px;flex-shrink:0;display:block}
+  .logo img{width:40px;height:40px;flex-shrink:0;display:block;
+        filter:drop-shadow(0 0 10px rgba(255,106,19,.40))}
   .logo .sb{color:var(--acc2)}
   .navtag{font-size:1rem;font-weight:800;color:var(--ink);background:var(--acc);
           border-radius:999px;padding:7px 14px;white-space:nowrap;flex-shrink:0}
 
-  header{padding:32px 0 6px;text-align:center}
-  header h1{font-size:clamp(1.7rem,6vw,2.3rem);margin-bottom:10px}
+  /* GLOW de la landing viva: el mismo resplandor naranja del acento. */
+  header{position:relative;padding:32px 0 6px;text-align:center;
+         background:radial-gradient(120% 75% at 50% 22%,rgba(255,106,19,.30),transparent 62%),
+                    radial-gradient(70% 50% at 88% 6%,rgba(255,248,181,.07),transparent 62%)}
+  header h1{font-size:clamp(1.7rem,6vw,2.3rem);margin-bottom:10px;
+           text-shadow:0 2px 14px rgba(0,0,0,.85)}
   header p{color:var(--mut);font-size:1.05rem;max-width:520px;margin:0 auto}
   header p b{color:var(--tx)}
 
@@ -116,17 +121,21 @@
   .soporte p{color:var(--mut);font-size:1rem;margin-bottom:14px}
   .soporte .btns{justify-content:center}
   .cor{color:var(--dim);font-size:1rem;margin-top:12px}
-  footer{margin-top:26px;text-align:center;color:var(--mut);font-size:1rem}
+  footer{margin-top:26px;text-align:center;color:var(--mut);font-size:1rem;
+         padding-top:20px;
+         background:linear-gradient(180deg,transparent,rgba(255,106,19,.06));
+         box-shadow:inset 0 1px 0 0 rgba(255,106,19,.14)}
 </style>
+<!--GLOW:[{"nombre": "header_marca", "css": "radial-gradient del <header>", "rgb": "#ff6a13", "alfa": 0.3, "base": "#0f0b06", "textos": ["tx", "mut"]}, {"nombre": "halo_hero_crema", "css": "segundo radial-gradient del <header>", "rgb": "#fff8b5", "alfa": 0.07, "base": "#0f0b06", "textos": ["tx", "mut"]}, {"nombre": "velo_footer", "css": "linear-gradient del footer", "rgb": "#ff6a13", "alfa": 0.06, "base": "#0f0b06", "textos": ["tx", "mut"]}]-->
 </head>
 <body>
-<nav><div class="wrap"><span class="logo"><img src="../img/logo-glow-128.png" width="30" height="30" alt="" decoding="async">MELAMINA<span class="sb">PRO</span></span><span class="navtag">ACCESO ACTIVO</span></div></nav>
-<div class="wrap">
-
-<header>
+<nav><div class="wrap"><span class="logo"><img src="../img/logo-mark-256.png" width="40" height="40" alt="" decoding="async">MELAMINA<span class="sb">PRO</span></span><span class="navtag">ACCESO ACTIVO</span></div></nav>
+<header><div class="wrap">
 <h1>🪵 Tu acceso está listo</h1>
 <p>Tus <b>640 clases</b>, módulo por módulo. Toca el módulo que quieras: se abre en Google Drive, en una pestaña nueva.</p>
-</header>
+</div></header>
+
+<div class="wrap">
 
 <div class="guardar">
 <h2>📌 Guarda este enlace ahora</h2>
@@ -188,8 +197,8 @@
 <p class="cor">whproperties.tx@gmail.com · WhatsApp +1 857 529 5509</p>
 </div>
 
-<footer><b>© 2026 · Melamina Pro</b> · Garantía de 3 días.</footer>
 </div>
+<footer><div class="wrap"><b>© 2026 · Melamina Pro</b> · Garantía de 3 días.</div></footer>
 <script>(function(){
   /* Los destinos van en base64: fuera del HTML plano, igual que en el molde. */
   var L={"c01":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMWNnYkp6NzY4SzNLa2Q4ZmxLYng0bmdXWEZ6eEhURXIt","c02":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMWlrU2pRTW8wMGJIekdJSHhaM082U01sMTNWbTZEZkg3","c03":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMU0tUWZ4TlNwV05fRkdnRURmamVRUkZ1S0t3VWRQcElS","c04":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMUFTSlVFS1pwU1BpaHp2Ukh5MVh5YTFuSUltaHZ6ZlRt","c05":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMWwyVkdBN2ZpeEtoNHBwSE50UFZwVUY2MGJDNDJFcWp4","c06":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMVN1bWZuZVZkal9VSEpPUV9hanhycEVwN1VrcEJJd3JG","c07":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMWEyNmtlWHQxMXZVRC16TXJrbUJDM3dXNlFiY2xTYTEt","c08":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMUZEdGxQQUdLZ0dvdDhXNXNMRUZ5b1FRbkJJRDJNb0w1","c09":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMXdmVzd5OWdZR0taWmNnXzU1U194eExZQXFsY3k0SGtH","c10":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMXBVVENra251b0J6akFDOXJoOVBBaUMwUjctVHAxRzlZ","c11":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMVZmTFJDeVgzRk80MXY1dnhfMGJiMWNqaGV2blhKMFhm","c12":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMS1tOEFhUE9wbjhrYkExWFlBVUZmZTdWMWFlaUFUQUZC","c13":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMXp0c2pDT1dNMHlNSnVlREpGOHQ2alRnTVFHT29UX2N3","c14":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMUNPcVRialRHYlFWejBKekFlcWpvZndxWXUwVU4xVGdR","c15":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMUdVVk5kX1lBcUE4Q3EzUmJuUVZwc3NEMVdnTTd6OXNX","lib":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMXJaSkl1QU9rQ0E0OXMxdnQ5NXRtblJmNnkyS3BCbUlx","m01":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMWR5NjU3RW1jejFmdkx5bGZUSkVUZVdpdDVmekIwSFFJ","m02":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMVZmSmxJVHhaUVRDWld0YjlSOGdzNlVNbWxfNXNBT2t0","m03":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMTA3Yk1XdFhFeTNPTXZrNGVINEZ1bnBXTUNtUWxoMFEz","m04":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMXZnY25aUUhKbHJXNXhYaG04RlNPMmp5c0NiUVR4WkRM","m05":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMUk4dXVIWXJxaUd0V2MwclMxenNlMnVPYVEtckhaMnYx","p01":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xbGNnRDdwbU9yZTFlRTFlZzJrR0hyWnlidjBZOExRdlMvdmlldw==","p02":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xeFE4ZmxHY19VYUVPcmhaRkFmQm1DVWhvekNuaDVfUmovdmlldw==","p03":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xNDdqTnRxTFUxYzQ0R19fT3hLZDBlZXhwWnNsMzJNOUEvdmlldw==","p04":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xZTRqYThQT2locWctcWZlaHNDcENfNDhaN2N5LTd6bnYvdmlldw==","p05":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xQUZwbXBPREd1QnZrZmQ5Qkk1dnhCWlBXQVJ5R3lOdVIvdmlldw==","p06":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xOWpkUTFxLU10S29HRmhKSkotSTJocU43dTlDQlhXd08vdmlldw==","p07":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xMG9heHVydGZUUERaOWMyd0RtUDVLcElackZxSEh0cFAvdmlldw==","p08":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xUUlmYWJxT2RYUGN5eHlzX2dBWEFiNzl6dkVsSmF2VEwvdmlldw==","p09":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xTXZOdWpleWU3TDRhblhUMXRPS2xGS2ktZXRVcVRjUW4vdmlldw==","p10":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xd0o1XzFyNXJXc3RsYUNVeDhwdXhNelMtQVVWRE8xV2Qvdmlldw==","p11":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xYTZwN1ZyMXU5dGdSOWMxU2o3SXVMY1BjVVBWMTJzQ2gvdmlldw==","p12":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xaUlqWkRwbUcyMWhzbGMzbGFGRmUzMkdxZ2s0d211UFYvdmlldw==","p13":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xdzJHVHg4dzhDenNiUUx1WHhkdWVtUUlJQldlcFVOZVgvdmlldw==","p14":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xeFU3dDhfWlhqZGo3aGQ5QjZYTEFfQ2tjcjI5Q21hM1Mvdmlldw==","p15":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xV1U2blNIZldNYUhkdGZWV0dKVTBVamFod3A4ejJmSVovdmlldw==","p16":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xTmE1eTUwekdSV2ZBdVBVVHl3RFA2VnpNRU5vWVl2Tk0vdmlldw==","p17":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xS3hvS0NGRVhnX1VDR1hHNHN5TVlhNGN2cnJCUW9ha2ovdmlldw==","p18":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xUy1ybDg3Yld6RnhTVUVMNXdPQzRSWGVmUDh5emFaLWsvdmlldw==","pk":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMVlwWmUwSUNSSjhkSDhpaVExUjF3TzJKWnZoODV6REFh","todocurso":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMVl5eHdjTW9ySkJPOGUzR1VNSEtMNFpYVXlBUkF6Y0tx","todomega":"aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMWZ4aXN6R0NXOGxKZFZYeHVmc1hxeGtLMWszQmxrMGxu"};
