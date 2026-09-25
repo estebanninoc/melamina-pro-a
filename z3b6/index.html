@@ -17,6 +17,15 @@
     --bg:#0f0b06; --panel:#1f160f; --panel2:#261c12; --panel3:#2d2015;
     --line:#6b4f3c; --tx:#fff6ee; --mut:#ecdac9; --dim:#d2bdaa;
     --acc:#ff6a13; --acc2:#ff9a4d; --ink:#0d0500; --pla:#47bcff; --max:760px;
+    /* --- v6: la CAPA DE PROFUNDIDAD de la landing de venta (curso.melamina.pro/v2),
+       portada mecanismo por mecanismo. Los gradientes SIEMPRE caen hacia --bg
+       (mas oscuro): sobre fondo mas oscuro el texto claro SUBE de contraste, nunca baja.
+       Ninguno va debajo de la letra --ink (el ink sobre naranja esta a 7.05, sin margen). */
+    --g:linear-gradient(150deg,var(--panel2),var(--bg));
+    --g2:linear-gradient(150deg,var(--panel),var(--bg));
+    --g3:linear-gradient(150deg,var(--panel3),var(--panel));
+    /* el anillo del par borde-vivo de la venta */
+    --anillo:0 0 0 1px rgba(255,106,19,.14);
     --disp:"Inter Tight","Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
     --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   }
@@ -29,99 +38,155 @@
   a{color:inherit;text-decoration:none}
   b,small,span,p,h1,h2{overflow-wrap:anywhere}
 
-  nav{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line)}
+  nav{position:sticky;top:0;z-index:50;
+       background:linear-gradient(180deg,rgba(31,22,15,.94),rgba(15,11,6,.90));
+       backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+       border-bottom:1px solid var(--line);
+       box-shadow:0 10px 30px -22px rgba(255,106,19,.9)}
   nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:10px}
   .logo{display:flex;align-items:center;gap:9px;font-family:var(--disp);font-weight:900;
         font-size:1.12rem;letter-spacing:-.04em;min-width:0}
-  .logo img{width:30px;height:30px;flex-shrink:0;display:block}
+  .logo img{width:30px;height:30px;flex-shrink:0;display:block;
+        filter:drop-shadow(0 0 13px rgba(255,106,19,.55))}
   .logo .sb{color:var(--acc2)}
+  /* el acento solido NO lleva gradiente debajo: el ink encima esta a 7.05 y no hay margen.
+     El resplandor va AFUERA, en box-shadow, donde no toca el fondo de la letra. */
   .navtag{font-size:1rem;font-weight:800;color:var(--ink);background:var(--acc);
-          border-radius:999px;padding:7px 14px;white-space:nowrap;flex-shrink:0}
+          border-radius:999px;padding:7px 14px;white-space:nowrap;flex-shrink:0;
+          box-shadow:0 0 0 1px rgba(255,106,19,.45),0 6px 20px -8px rgba(255,106,19,.9),
+                     0 0 34px -8px rgba(255,106,19,.5)}
 
   /* GLOW de la landing viva: el mismo resplandor naranja del acento. */
-  header{padding:32px 0 6px;text-align:center;
-         background:radial-gradient(120% 75% at 50% 22%,rgba(255,106,19,.30),transparent 62%)}
-  header h1{font-size:clamp(1.7rem,6vw,2.3rem);margin-bottom:10px}
+  header{position:relative;padding:32px 0 6px;text-align:center;
+         background:radial-gradient(120% 75% at 50% 22%,rgba(255,106,19,.30),transparent 62%),
+                    radial-gradient(70% 50% at 88% 6%,rgba(255,248,181,.07),transparent 62%)}
+  header h1{font-size:clamp(1.7rem,6vw,2.3rem);margin-bottom:10px;
+           text-shadow:0 2px 14px rgba(0,0,0,.85)}
   header p{color:var(--mut);font-size:1.05rem;max-width:520px;margin:0 auto}
   header p b{color:var(--tx)}
 
-  .guardar{background:var(--panel);border:1px solid var(--line);border-radius:16px;
-           padding:18px;margin-top:22px;
-           box-shadow:0 0 0 1px rgba(255,106,19,.16),0 10px 28px -22px rgba(255,106,19,.8)}
+  .guardar{background:linear-gradient(160deg,var(--panel2),var(--bg));
+           border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:22px;
+           box-shadow:0 0 0 1px rgba(255,106,19,.22),0 12px 30px -20px rgba(255,106,19,.9),
+                      0 0 60px -26px rgba(255,106,19,.55)}
   .guardar h2{font-size:1.15rem;margin-bottom:6px}
   .guardar p{color:var(--mut);font-size:1rem;margin-bottom:14px}
   .btns{display:flex;flex-wrap:wrap;gap:10px}
   .btns a,.btns button{flex:1 1 180px;display:inline-flex;align-items:center;justify-content:center;
        gap:7px;min-height:52px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);
-       background:var(--panel2);color:var(--tx);font:800 1rem var(--sans);cursor:pointer}
-  .btns .pri{background:var(--acc);color:var(--ink);border-color:var(--acc)}
+       background:linear-gradient(150deg,var(--panel3),var(--panel));color:var(--tx);
+       font:800 1rem var(--sans);cursor:pointer;
+       box-shadow:var(--anillo),0 8px 22px -18px rgba(255,106,19,.85)}
+  /* el primario: el mismo triple resplandor del .btn de la venta */
+  .btns .pri{background:var(--acc);color:var(--ink);border-color:var(--acc);
+       box-shadow:0 0 0 1px rgba(255,106,19,.45),0 8px 26px -6px rgba(255,106,19,.9),
+                  0 0 52px -6px rgba(255,106,19,.55)}
   .ok{color:var(--acc2);font-weight:700;margin-top:10px;min-height:1.3em;font-size:1rem}
 
   .avisos{display:grid;gap:10px;margin-top:16px}
-  .aviso{display:flex;gap:11px;align-items:flex-start;background:var(--panel);
+  .aviso{display:flex;gap:11px;align-items:flex-start;background:var(--g);
          border:1px solid var(--line);border-radius:14px;padding:14px 16px;
-         color:var(--mut);font-size:1rem}
+         color:var(--mut);font-size:1rem;
+         box-shadow:0 0 0 1px rgba(255,106,19,.10),0 10px 26px -22px rgba(255,106,19,.8)}
   .aviso b{color:var(--tx)}
-  .aviso .ic{font-size:1.2rem;flex-shrink:0}
+  /* v6: la caja .vi de la landing de venta. Un emoji de sistema pinta +61% mas alto
+     que la altura de mayuscula: suelto agranda la fila y se descuadra. En caja fija
+     de 28px (26 en movil) con su propia familia de emoji, alinea con la letra. */
+  .ic{flex-shrink:0;width:28px;height:28px;font-size:22px;line-height:1;
+      display:inline-flex;align-items:center;justify-content:center;overflow:hidden;
+      font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
+  .aviso .ic{width:28px;height:28px;font-size:22px}
 
   h2.etapa{font-size:1.05rem;color:var(--acc2);text-transform:uppercase;letter-spacing:.1em;
-           margin:34px 0 -4px;font-weight:800}
+           margin:34px 0 -4px;font-weight:800;text-shadow:0 0 18px rgba(255,106,19,.45)}
 
-  .bloque{background:var(--panel);border:1px solid var(--line);border-radius:18px;
-          padding:16px;margin-top:16px}
+  .bloque{background:var(--g2);border:1px solid var(--line);border-radius:18px;
+          padding:16px;margin-top:16px;
+          box-shadow:var(--anillo),0 14px 34px -26px rgba(255,106,19,.6)}
   /* las DOS familias: el glow marca la familia, no adorna todo. */
-  .f-curso{border-color:rgba(255,106,19,.45);
-           box-shadow:0 0 0 1px rgba(255,106,19,.16),0 14px 38px -26px rgba(255,106,19,.9)}
-  .f-planos{border-color:rgba(71,188,255,.45);
-            box-shadow:0 0 0 1px rgba(71,188,255,.16),0 14px 38px -26px rgba(71,188,255,.9)}
-  .f-mixto{border-color:var(--line);box-shadow:none}
+  .f-curso{background:linear-gradient(150deg,var(--panel2),var(--bg));
+           border-color:rgba(255,106,19,.45);
+           box-shadow:0 0 0 1px rgba(255,106,19,.22),0 14px 38px -24px rgba(255,106,19,.95),
+                      0 0 72px -34px rgba(255,106,19,.75)}
+  .f-planos{background:linear-gradient(150deg,var(--panel2),var(--bg));
+            border-color:rgba(71,188,255,.45);
+            box-shadow:0 0 0 1px rgba(71,188,255,.22),0 14px 38px -24px rgba(71,188,255,.95),
+                       0 0 72px -34px rgba(71,188,255,.75)}
+  /* el mixto NO lleva glow de familia (decision firmada en la v5: el glow marca
+     familia, no adorna). Lleva relieve NEUTRO, sin tinte de acento. */
+  .f-mixto{border-color:var(--line);
+           box-shadow:0 0 0 1px rgba(107,79,60,.40),0 12px 30px -26px rgba(0,0,0,.95)}
   .fam{display:inline-flex;align-items:center;gap:7px;font-family:var(--disp);font-weight:800;
        font-size:1rem;padding:7px 14px;border-radius:999px;margin-bottom:11px;
-       letter-spacing:.04em;background:var(--panel3);color:var(--tx)}
-  .f-curso .fam{background:var(--acc);color:var(--ink)}
-  .f-planos .fam{background:var(--pla);color:var(--ink)}
+       letter-spacing:.04em;background:var(--g3);color:var(--tx);
+       box-shadow:var(--anillo),0 6px 18px -14px rgba(255,106,19,.9)}
+  /* chips de acento SOLIDO (sin gradiente debajo del ink) + halo por filter, afuera */
+  .f-curso .fam{background:var(--acc);color:var(--ink);box-shadow:none;
+       filter:drop-shadow(0 4px 13px rgba(255,106,19,.55))}
+  .f-planos .fam{background:var(--pla);color:var(--ink);box-shadow:none;
+       filter:drop-shadow(0 4px 13px rgba(71,188,255,.55))}
   .bcab{display:flex;align-items:center;gap:11px;row-gap:4px;flex-wrap:wrap;margin-bottom:12px}
-  .bcab .ic{font-size:1.5rem;flex-shrink:0}
+  .bcab .ic{width:34px;height:34px;font-size:26px}
   .bcab h2{font-size:1.12rem;flex:1;min-width:0}
-  .bcab .cnt{font-size:1rem;font-weight:800;color:var(--dim);white-space:nowrap;flex-shrink:0}
+  .bcab .cnt{font-size:1rem;font-weight:800;color:var(--dim);white-space:nowrap;flex-shrink:0;
+              text-shadow:0 1px 8px rgba(0,0,0,.8)}
 
-  .fila,summary{display:flex;align-items:center;gap:11px;background:var(--panel2);
-        border:1px solid var(--line);border-radius:14px;padding:14px 16px;min-height:60px}
+  .fila,summary{display:flex;align-items:center;gap:11px;background:var(--g);
+        border:1px solid var(--line);border-radius:14px;padding:14px 16px;min-height:60px;
+        box-shadow:0 0 0 1px rgba(255,106,19,.08),0 8px 22px -20px rgba(255,106,19,.8)}
   .fila{margin-bottom:9px}
-  .fila .ic,summary .ic{font-size:1.25rem;flex-shrink:0}
+  .fila .ic,summary .ic{width:28px;height:28px;font-size:22px}
   .tx{flex:1;min-width:0}
   .tx b{display:block;font-size:1rem;line-height:1.3;font-weight:700}
   .tx small{color:var(--mut);font-size:1rem}
   .btn{display:inline-flex;align-items:center;justify-content:center;background:var(--acc);
        color:var(--ink);font-family:var(--disp);font-weight:800;font-size:1rem;
-       padding:11px 18px;border-radius:999px;flex-shrink:0;min-height:44px}
+       padding:11px 18px;border-radius:999px;flex-shrink:0;min-height:44px;
+       box-shadow:0 0 0 1px rgba(255,106,19,.45),0 8px 24px -8px rgba(255,106,19,.9)}
 
   details{margin:0}
   details>summary{cursor:pointer;list-style:none;user-select:none}
   summary::-webkit-details-marker{display:none}
-  .chev{width:34px;height:34px;border-radius:50%;background:var(--panel3);color:var(--tx);
-        display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
-  details[open]>summary .chev{background:var(--acc);color:var(--ink)}
-  .lista{padding:8px 0 0}
+  .chev{width:34px;height:34px;border-radius:50%;background:var(--g3);color:var(--tx);
+        display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;
+        box-shadow:var(--anillo)}
+  details[open]>summary .chev{background:var(--acc);color:var(--ink);box-shadow:none;
+        filter:drop-shadow(0 0 11px rgba(255,106,19,.75))}
+  .lista{padding:8px 0 0;
+         background:linear-gradient(180deg,rgba(255,106,19,.05),transparent 42%);
+         border-radius:12px}
   .sub{display:flex;align-items:center;gap:10px;padding:13px 12px;border-radius:12px;
        border:1px solid transparent;min-height:56px}
   .sub .nm{font-family:var(--disp);font-weight:900;font-size:1rem;color:var(--dim);
            min-width:30px;flex-shrink:0;text-align:center}
-  .sub .ic{font-size:1.15rem;flex-shrink:0}
+  .sub .ic{width:26px;height:26px;font-size:20px}
   .sub .st{flex:1;min-width:0}
   .sub .st b{display:block;font-size:1rem;font-weight:600;line-height:1.35}
   .sub .st small{color:var(--dim);font-size:1rem}
+  /* 699 nodos: UNA sola sombra por pastilla. El triple glow de la venta es para
+     los botones grandes; aca multiplicado por 699 es jank en el Android del target. */
   .go{font-family:var(--disp);font-weight:800;font-size:1rem;color:var(--tx);
-      background:var(--panel3);padding:10px 14px;border-radius:999px;flex-shrink:0;min-height:44px;
-      display:inline-flex;align-items:center}
+      background:var(--g3);padding:10px 14px;border-radius:999px;flex-shrink:0;min-height:44px;
+      display:inline-flex;align-items:center;
+      box-shadow:0 0 0 1px rgba(255,106,19,.12)}
   .anidado{margin:9px 0 0}
-  .anidado>summary{background:var(--panel3)}
+  .anidado>summary{background:var(--g3);
+                   box-shadow:var(--anillo),0 8px 22px -20px rgba(255,106,19,.8)}
 
   .respaldo{margin-top:26px}
-  .respaldo>summary{background:var(--panel)}
-  footer{margin-top:26px;text-align:center;color:var(--mut);font-size:1rem}
+  .respaldo>summary{background:var(--g2);box-shadow:var(--anillo)}
+  footer{margin-top:26px;text-align:center;color:var(--mut);font-size:1rem;
+         padding-top:20px;
+         background:linear-gradient(180deg,transparent,rgba(255,106,19,.06))}
+
+  @media(max-width:520px){
+    .ic,.aviso .ic,.fila .ic,summary .ic{width:26px;height:26px;font-size:20px}
+    .bcab .ic{width:31px;height:31px;font-size:24px}
+    .sub .ic{width:24px;height:24px;font-size:19px}
+  }
 </style>
-<!--GLOW:[{"nombre":"header_marca","css":"radial-gradient del <header>","rgb":"#ff6a13","alfa":0.3,"base":"#0f0b06","textos":["tx","mut"]},{"nombre":"cinta_curso","css":"fondo del chip de familia CURSO","rgb":"#ff6a13","alfa":1.0,"base":"#1f160f","textos":["ink"]},{"nombre":"cinta_planos","css":"fondo del chip de familia PLANOS","rgb":"#47bcff","alfa":1.0,"base":"#1f160f","textos":["ink"]},{"nombre":"cinta_mixto","css":"fondo del chip de familia MIXTO","rgb":"#2d2015","alfa":1.0,"base":"#1f160f","textos":["tx"]},{"nombre":"anillo_naranja","css":"box-shadow 0 0 0 1px de .guardar y .f-curso","rgb":"#ff6a13","alfa":0.16,"base":"#0f0b06","textos":[]},{"nombre":"borde_curso","css":"border-color del .bloque de CURSO","rgb":"#ff6a13","alfa":0.45,"base":"#1f160f","textos":[]},{"nombre":"halo_guardar","css":"box-shadow difuso de .guardar","rgb":"#ff6a13","alfa":0.8,"base":"#0f0b06","textos":[]},{"nombre":"halo_curso","css":"box-shadow difuso del .bloque de CURSO","rgb":"#ff6a13","alfa":0.9,"base":"#0f0b06","textos":[]},{"nombre":"anillo_planos","css":"box-shadow 0 0 0 1px del .bloque de PLANOS","rgb":"#47bcff","alfa":0.16,"base":"#0f0b06","textos":[]},{"nombre":"borde_planos","css":"border-color del .bloque de PLANOS","rgb":"#47bcff","alfa":0.45,"base":"#1f160f","textos":[]},{"nombre":"halo_planos","css":"box-shadow difuso del .bloque de PLANOS","rgb":"#47bcff","alfa":0.9,"base":"#0f0b06","textos":[]}]-->
+<!--CONTRASTE: este manifiesto DECLARA lo que la pagina pinta, pero el medidor canonico ya no es el: desde la v6 el contraste se mide resolviendo el CSS contra el DOM (cada nodo con letra vs el fondo que hereda, con los gradientes muestreados en 11 puntos). 1014 pares unicos, piso 7:1, peor 7.049 (ink sobre el naranja del navtag, preexistente). Por eso NINGUN gradiente va debajo de la letra --ink. -->
+<!--GLOW:[{"nombre": "header_marca", "css": "radial-gradient del <header>", "rgb": "#ff6a13", "alfa": 0.3, "base": "#0f0b06", "textos": ["tx", "mut"]}, {"nombre": "cinta_curso", "css": "fondo del chip de familia CURSO", "rgb": "#ff6a13", "alfa": 1.0, "base": "#1f160f", "textos": ["ink"]}, {"nombre": "cinta_planos", "css": "fondo del chip de familia PLANOS", "rgb": "#47bcff", "alfa": 1.0, "base": "#1f160f", "textos": ["ink"]}, {"nombre": "cinta_mixto", "css": "fondo del chip de familia MIXTO", "rgb": "#2d2015", "alfa": 1.0, "base": "#1f160f", "textos": ["tx"]}, {"nombre": "anillo_naranja", "css": "box-shadow 0 0 0 1px de .guardar y .f-curso", "rgb": "#ff6a13", "alfa": 0.16, "base": "#0f0b06", "textos": []}, {"nombre": "borde_curso", "css": "border-color del .bloque de CURSO", "rgb": "#ff6a13", "alfa": 0.45, "base": "#1f160f", "textos": []}, {"nombre": "halo_guardar", "css": "box-shadow difuso de .guardar", "rgb": "#ff6a13", "alfa": 0.8, "base": "#0f0b06", "textos": []}, {"nombre": "halo_curso", "css": "box-shadow difuso del .bloque de CURSO", "rgb": "#ff6a13", "alfa": 0.9, "base": "#0f0b06", "textos": []}, {"nombre": "anillo_planos", "css": "box-shadow 0 0 0 1px del .bloque de PLANOS", "rgb": "#47bcff", "alfa": 0.16, "base": "#0f0b06", "textos": []}, {"nombre": "borde_planos", "css": "border-color del .bloque de PLANOS", "rgb": "#47bcff", "alfa": 0.45, "base": "#1f160f", "textos": []}, {"nombre": "halo_planos", "css": "box-shadow difuso del .bloque de PLANOS", "rgb": "#47bcff", "alfa": 0.9, "base": "#0f0b06", "textos": []}, {"nombre": "halo_hero_crema", "css": "segundo radial-gradient del <header> (v6)", "rgb": "#fff8b5", "alfa": 0.07, "base": "#0f0b06", "textos": ["tx", "mut"]}, {"nombre": "grad_panel_g", "css": "--g: linear-gradient(150deg,panel2,bg) — .aviso, .fila, summary", "rgb": "#261c12", "alfa": 1.0, "base": "#0f0b06", "textos": ["tx", "mut", "dim"]}, {"nombre": "grad_panel_g2", "css": "--g2: linear-gradient(150deg,panel,bg) — .bloque, .respaldo", "rgb": "#1f160f", "alfa": 1.0, "base": "#0f0b06", "textos": ["tx", "mut", "dim"]}, {"nombre": "grad_panel_g3", "css": "--g3: linear-gradient(150deg,panel3,panel) — .go, .chev, .fam mixto", "rgb": "#2d2015", "alfa": 1.0, "base": "#1f160f", "textos": ["tx"]}, {"nombre": "grad_guardar", "css": "linear-gradient(160deg,panel2,bg) de .guardar (v6)", "rgb": "#261c12", "alfa": 1.0, "base": "#0f0b06", "textos": ["tx", "mut", "acc2"]}, {"nombre": "grad_familia", "css": "linear-gradient(150deg,panel2,bg) de .f-curso y .f-planos (v6)", "rgb": "#261c12", "alfa": 1.0, "base": "#0f0b06", "textos": ["tx", "mut", "dim"]}, {"nombre": "grad_btn_secundario", "css": "linear-gradient(150deg,panel3,panel) de .btns a/button (v6)", "rgb": "#2d2015", "alfa": 1.0, "base": "#1f160f", "textos": ["tx"]}, {"nombre": "grad_nav", "css": "linear-gradient(180deg,rgba(31,22,15,.94),rgba(15,11,6,.90)) del nav (v6)", "rgb": "#1f160f", "alfa": 0.94, "base": "#0f0b06", "textos": ["tx", "acc2"]}, {"nombre": "velo_lista", "css": "linear-gradient(180deg,rgba(acc,.05),transparent) de .lista (v6)", "rgb": "#ff6a13", "alfa": 0.05, "base": "#1f160f", "textos": ["tx", "dim"]}, {"nombre": "velo_footer", "css": "linear-gradient(180deg,transparent,rgba(acc,.06)) del footer (v6)", "rgb": "#ff6a13", "alfa": 0.06, "base": "#0f0b06", "textos": ["mut"]}]-->
 </head>
 <body>
 <nav><div class="wrap"><span class="logo"><img src="../img/logo-glow-128.png" width="30" height="30" alt="" decoding="async">MELAMINA<span class="sb">PRO</span></span><span class="navtag">ACCESO ACTIVO</span></div></nav>
