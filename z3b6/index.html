@@ -98,7 +98,12 @@
   .aviso .ic{width:28px;height:28px;font-size:22px}
 
   h2.etapa{font-size:1.05rem;color:var(--acc2);text-transform:uppercase;letter-spacing:.1em;
-           margin:34px 0 -4px;font-weight:800;text-shadow:0 0 18px rgba(255,106,19,.45)}
+           margin:34px 0 -4px;font-weight:800;text-shadow:0 0 18px rgba(255,106,19,.45);
+           display:flex;align-items:center;gap:10px}
+  /* la barrita de seccion de la venta. ::before decorativo: no pinta fondo de letra. */
+  h2.etapa::before{content:"";width:22px;height:3px;border-radius:2px;flex-shrink:0;
+           background:linear-gradient(90deg,var(--acc),var(--acc2));
+           box-shadow:0 0 14px 0 rgba(255,106,19,.8)}
 
   .bloque{background:var(--g2);border:1px solid var(--line);border-radius:18px;
           padding:16px;margin-top:16px;
@@ -154,9 +159,10 @@
         filter:drop-shadow(0 0 11px rgba(255,106,19,.75))}
   .lista{padding:8px 0 0;
          background:linear-gradient(180deg,rgba(255,106,19,.05),transparent 42%);
-         border-radius:12px}
+         border-radius:12px;box-shadow:inset 0 1px 0 0 rgba(255,106,19,.12)}
   .sub{display:flex;align-items:center;gap:10px;padding:13px 12px;border-radius:12px;
-       border:1px solid transparent;min-height:56px}
+       border:1px solid transparent;min-height:56px;
+       box-shadow:inset 0 0 0 1px rgba(255,106,19,.06)}
   .sub .nm{font-family:var(--disp);font-weight:900;font-size:1rem;color:var(--dim);
            min-width:30px;flex-shrink:0;text-align:center}
   .sub .ic{width:26px;height:26px;font-size:20px}
@@ -177,7 +183,8 @@
   .respaldo>summary{background:var(--g2);box-shadow:var(--anillo)}
   footer{margin-top:26px;text-align:center;color:var(--mut);font-size:1rem;
          padding-top:20px;
-         background:linear-gradient(180deg,transparent,rgba(255,106,19,.06))}
+         background:linear-gradient(180deg,transparent,rgba(255,106,19,.06));
+         box-shadow:inset 0 1px 0 0 rgba(255,106,19,.14)}
 
   @media(max-width:520px){
     .ic,.aviso .ic,.fila .ic,summary .ic{width:26px;height:26px;font-size:20px}
