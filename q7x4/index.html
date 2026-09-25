@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Tu acceso &middot; MELAMINA PRO</title>
+<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../img/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@800;900&family=Inter:wght@400;600;700;800&display=swap">
+<style>
+  :root{
+    /* PALETA v4 "TALLER" — copiada tal cual del HTML vivo de curso.melamina.pro/v2/.
+       Contrastes ya medidos contra --bg: tx 17,33 · mut 13,60 · dim 10,22 · acc2 8,79 · acc3 17,04.
+       --steel (6,31) NO se usa: no llega al piso de 7:1 de esta obra. --acc solo como
+       FONDO de accion (como texto su techo medido es 7,32 y solo contra negro absoluto). */
+    --bg:#1a120b; --panel:#241a11; --panel2:#302317; --line:#6b4f3c;
+    --tx:#fff6ee; --mut:#ecdac9; --dim:#d2bdaa;
+    --acc:#ff6a13; --acc2:#ff9a4d; --ink:#0d0500; --acc3:#fff8b5;
+    --steel:#a89383; --deep:#0f0a06; --max:760px;
+    --disp:"Inter Tight","Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  /* 17px es PISO, no medida de cuerpo: 59,6% del publico tiene 45 anos o mas.
+     Aca NINGUN texto baja de 17px; la jerarquia la hace el color, no el tamano. */
+  html{font-size:17px}
+  body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:17px;line-height:1.55;
+       -webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:40px}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+  h1,h2{font-family:var(--disp);font-weight:900;letter-spacing:-.02em;line-height:1.16}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;height:auto}
+
+  nav{position:sticky;top:0;z-index:50;background:rgba(26,18,11,.94);backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:10px;
+            min-height:64px;padding:9px 16px;flex-wrap:wrap}
+  .logo{display:flex;align-items:center;gap:9px;font-family:var(--disp);font-weight:900;
+        font-size:19px;letter-spacing:-.03em;min-width:0}
+  .logo .mark{width:34px;height:34px;flex-shrink:0;display:block}
+  .logo .sub{font-weight:800;font-size:17px;letter-spacing:.02em;color:var(--acc2);
+             align-self:center;margin-left:2px}
+  .navtag{font-size:17px;font-weight:800;color:var(--ink);background:var(--acc);
+          border-radius:999px;padding:5px 14px;white-space:nowrap;flex-shrink:0}
+
+  header{padding:28px 0 4px}
+  header .paq{display:inline-block;font-size:17px;font-weight:800;color:var(--ink);background:var(--acc3);
+              border-radius:999px;padding:6px 14px;margin-bottom:13px;line-height:1.35;
+              overflow-wrap:anywhere}
+  header h1{font-size:31px;margin-bottom:11px;overflow-wrap:anywhere}
+  header p{color:var(--mut);font-size:18px;overflow-wrap:anywhere}
+  header p b{color:var(--tx)}
+
+  .guardar{background:var(--panel2);border:2px solid var(--acc);border-radius:16px;padding:17px;margin:20px 0 0}
+  .guardar h2{font-size:21px;margin:0 0 8px}
+  .guardar p{font-size:17px;color:var(--mut);margin:0 0 14px}
+  .guardar .btns{display:flex;flex-wrap:wrap;gap:9px}
+  .guardar a,.guardar button{flex:1 1 210px;display:inline-flex;align-items:center;justify-content:center;
+    gap:7px;min-height:50px;padding:12px 13px;border-radius:11px;font-family:var(--sans);
+    font-size:17px;font-weight:800;cursor:pointer;border:1px solid var(--line);
+    background:var(--panel);color:var(--tx);min-width:0;text-align:center}
+  .guardar .pri{background:var(--acc);border-color:var(--acc);color:var(--ink)}
+  .guardar .ok{font-size:17px;color:var(--acc3);margin-top:10px;min-height:1.3em;font-weight:700}
+
+  .avisos{margin:18px 0 0;display:grid;gap:9px}
+  .aviso{display:flex;gap:11px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);
+         border-radius:13px;padding:14px 15px;font-size:17px;color:var(--mut)}
+  .aviso b{color:var(--tx)}
+  .aviso .ic{flex-shrink:0;font-size:20px;line-height:1.3}
+
+  .bloque,.bono,.bajar{background:var(--panel);border:1px solid var(--line);border-radius:18px;
+                       padding:17px;margin-top:20px}
+  .bono{border-color:var(--acc);background:var(--panel2)}
+  .bajar{background:var(--deep)}
+  /* la cuenta va en su PROPIO renglon: una pastilla flex-shrink:0 al lado del h2 es
+     lo que desbordaba a 360 px en la v6 (medido). Aca no compite con nada. */
+  .bcab{margin-bottom:13px}
+  .bcab .fl{display:flex;align-items:center;gap:11px}
+  .bcab .ic{font-size:24px;flex-shrink:0;line-height:1}
+  .bcab h2{font-size:21px;flex:1;min-width:0;overflow-wrap:anywhere}
+  .bcab .cnt{display:block;margin-top:5px;font-size:17px;color:var(--dim);overflow-wrap:anywhere}
+
+  .fila{display:flex;align-items:center;gap:12px;background:var(--panel2);border:1px solid var(--line);
+        border-radius:13px;padding:14px 15px;margin-bottom:9px;flex-wrap:wrap}
+  .fila:last-child{margin-bottom:0}
+  .fila.dest{border-color:var(--acc)}
+  .fila .ic{font-size:21px;flex-shrink:0;line-height:1}
+  .fila .tx{flex:1 1 150px;min-width:0}
+  .fila .tx b{display:block;font-size:18px;line-height:1.32;overflow-wrap:anywhere}
+  .fila .tx small{display:block;color:var(--mut);font-size:17px;overflow-wrap:anywhere;line-height:1.4}
+  .btn{display:inline-flex;align-items:center;justify-content:center;background:var(--acc);color:var(--ink);
+       font-family:var(--disp);font-weight:900;font-size:17px;min-height:48px;padding:12px 20px;
+       border-radius:999px;flex-shrink:0;white-space:nowrap}
+
+  details{background:var(--panel2);border:1px solid var(--line);border-radius:13px;overflow:hidden;margin-top:9px}
+  details[open]{border-color:var(--acc2)}
+  summary{display:flex;align-items:center;gap:12px;padding:15px;cursor:pointer;list-style:none;
+          user-select:none;min-height:58px}
+  summary::-webkit-details-marker{display:none}
+  summary .ic{font-size:21px;flex-shrink:0;line-height:1}
+  summary .tx{flex:1;min-width:0}
+  summary .tx b{display:block;font-size:18px;line-height:1.32;overflow-wrap:anywhere}
+  summary .tx small{display:block;color:var(--mut);font-size:17px;overflow-wrap:anywhere;line-height:1.4}
+  .chev{width:32px;height:32px;border-radius:50%;background:var(--panel);color:var(--tx);
+        border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
+        font-size:17px;flex-shrink:0;transition:transform .2s}
+  details[open] .chev{transform:rotate(90deg);background:var(--acc);color:var(--ink);border-color:var(--acc)}
+  .lista{padding:0 10px 10px}
+  .sub{display:flex;align-items:center;gap:10px;padding:13px 10px;border-radius:11px;min-height:54px;
+       flex-wrap:wrap}
+  /* el UNICO borde que lleva informacion (separa modulo de modulo en una lista
+     de 14) va en --steel: 5,20:1 sobre --panel2, o sea pasa el 3:1 de WCAG 1.4.11.
+     --line no puede pasarlo contra NINGUNA superficie de la v4 (2,04 a 2,63):
+     es hairline de adorno por diseno, y como tal queda solo en los contornos. */
+  .sub+.sub{border-top:1px solid var(--steel)}
+  .sub .nm{font-family:var(--disp);font-weight:900;font-size:17px;color:var(--acc2);min-width:28px;
+           flex-shrink:0;font-variant-numeric:tabular-nums;text-align:center}
+  .sub .st{flex:1 1 140px;min-width:0}
+  .sub .st b{display:block;font-size:18px;font-weight:700;line-height:1.32;overflow-wrap:anywhere}
+  .sub .st small{display:block;color:var(--mut);font-size:17px;overflow-wrap:anywhere;line-height:1.4}
+  .go{font-family:var(--disp);font-weight:900;font-size:17px;color:var(--ink);background:var(--acc);
+      padding:9px 15px;border-radius:999px;flex-shrink:0;white-space:nowrap;min-height:44px;
+      display:inline-flex;align-items:center}
+
+  .aqui{display:inline-block;background:var(--acc3);color:var(--ink);font-family:var(--disp);font-weight:900;
+        font-size:17px;padding:2px 9px;border-radius:999px;margin-left:6px;white-space:nowrap}
+  .nota{margin-top:11px;font-size:17px;color:var(--mut);background:var(--panel);
+        border:1px dashed var(--line);border-radius:12px;padding:13px 15px;line-height:1.45}
+  .nota b{color:var(--tx)}
+  .nota ul{margin:7px 0 0;padding-left:20px}
+  .nota li{margin-bottom:4px;overflow-wrap:anywhere}
+  .bajar .int{color:var(--mut);font-size:17px;margin:-3px 0 12px;overflow-wrap:anywhere}
+  .bajar .fila{background:var(--panel)}
+
+  .soporte{margin-top:22px;text-align:center;background:var(--panel);border:1px solid var(--line);
+           border-radius:18px;padding:22px 17px}
+  .soporte h2{font-size:21px;margin-bottom:9px}
+  .soporte p{color:var(--mut);font-size:17px;margin-bottom:15px}
+  .soporte .btns{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
+  .soporte .btns .btn{flex:1 1 230px;min-width:0;white-space:normal}
+  .soporte .cor{display:block;margin-top:12px;font-size:17px;color:var(--dim);overflow-wrap:anywhere}
+  footer{margin-top:28px;text-align:center;color:var(--mut);font-size:17px;padding-bottom:6px}
+  footer .logo{justify-content:center;margin-bottom:11px}
+
+  @media(max-width:430px){
+    .fila .btn{flex:1 1 100%;order:3}
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <span class="logo"><img class="mark" src="../img/logo-glow-128.png" width="34" height="34" alt="" decoding="async">MELAMINA<span class="sub">PRO</span></span>
+  <span class="navtag">ACCESO ACTIVO</span>
+</div></nav>
+
+<div class="wrap">
+
+  <header>
+    <span class="paq">Curso completo en video + biblioteca de planos</span>
+    <h1>Tu acceso esta listo</h1>
+    <p>Tus <b>563 archivos</b> del curso y tus <b>2.562 planos</b>, seccion por seccion. Toca la seccion que quieras: se abre en una pestana nueva de Google Drive.</p>
+  </header>
+
+  <div class="guardar">
+    <h2>&#128204; Guarda este enlace ahora</h2>
+    <p>Esta pagina es tu acceso <b>de por vida</b>. Mandatela a tu propio WhatsApp o a tu correo para no perderla nunca.</p>
+    <div class="btns">
+      <a class="pri" id="g-wa" href="#" target="_blank" rel="noopener">&#128172; Enviarmelo a mi WhatsApp</a>
+      <a id="g-mail" href="#">&#9993;&#65039; Enviarmelo al correo</a>
+      <button type="button" id="g-copy">&#128279; Copiar enlace</button>
+    </div>
+    <div class="ok" id="g-ok"></div>
+  </div>
+
+  <div class="avisos">
+    <div class="aviso"><span class="ic">&#11015;&#65039;</span><span><b>Descarga los archivos, no solo los veas en linea.</b> En Drive toca el boton de descarga (arriba a la derecha). Los videos y los PDF de planos pesan, y en linea no siempre abren bien.</span></div>
+    <div class="aviso"><span class="ic">&#128241;</span><span><b>&iquest;Un plano no abre en el celular?</b> Abrilo en el computador. Los PDF de cientos de paginas a veces no cargan en el telefono.</span></div>
+    <div class="aviso"><span class="ic">&#9989;</span><span><b>Todo es tuyo y todo se descarga.</b> Queda en tu disco y no vence nunca. Garantia de 3 dias.</span></div>
+  </div>
+
+  <section class="bloque"><div class="bcab"><div class="fl"><span class="ic">&#127909;</span><h2>1 &amp;middot; El curso en video</h2></div><span class="cnt">15 secciones</span></div><div class="fila dest"><span class="ic">🎥</span><span class="tx"><b>1 · Videos Melamina PRO <span class="aqui">empieza aqui</span></b><small>30 archivos · 20 en video</small></span><a class="btn" data-l="c01" target="_blank" rel="noopener">ABRIR &#9656;</a></div><details><summary><span class="ic">&#128193;</span><span class="tx"><b>Las otras 14 secciones del curso</b><small>de la 2 a la 15 · en orden</small></span><span class="chev">&#9656;</span></summary><div class="lista"><a class="sub" data-l="c02" target="_blank" rel="noopener"><span class="nm">02</span><span class="st"><b>Manuales sobre Melamina</b><small>19 archivos</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="c03" target="_blank" rel="noopener"><span class="nm">03</span><span class="st"><b>Clases Adicionales</b><small>14 videos</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="c04" target="_blank" rel="noopener"><span class="nm">04</span><span class="st"><b>Planos y Plantillas</b><small>18 archivos</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="c05" target="_blank" rel="noopener"><span class="nm">05</span><span class="st"><b>Elaboracion de Muebles como Negocio</b><small>2 videos</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="c06" target="_blank" rel="noopener"><span class="nm">06</span><span class="st"><b>Diseno de Muebles Modulares como Negocio</b><small>27 videos</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="c07" target="_blank" rel="noopener"><span class="nm">07</span><span class="st"><b>Planos Explicados en Video</b><small>17 videos</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="c08" target="_blank" rel="noopener"><span class="nm">08</span><span class="st"><b>Planos y Proyectos de Carpinteria</b><small>16 archivos</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="c09" target="_blank" rel="noopener"><span class="nm">09</span><span class="st"><b>Aprende SketchUp</b><small>28 archivos · 8 en video</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="c10" target="_blank" rel="noopener"><span class="nm">10</span><span class="st"><b>Aprende Polyboard</b><small>12 archivos · 2 en video</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="c11" target="_blank" rel="noopener"><span class="nm">11</span><span class="st"><b>Carpinteria en Aluminio</b><small>2 archivos</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="c12" target="_blank" rel="noopener"><span class="nm">12</span><span class="st"><b>Soldadura Electrica</b><small>1 archivo</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="c13" target="_blank" rel="noopener"><span class="nm">13</span><span class="st"><b>Resina Epoxica</b><small>24 videos</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="c14" target="_blank" rel="noopener"><span class="nm">14</span><span class="st"><b>Bono: Descarga SketchUp</b><small>2 archivos · 1 en video</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="c15" target="_blank" rel="noopener"><span class="nm">15</span><span class="st"><b>Pack Mantenimiento del Hogar 360</b><small>351 videos</small></span><span class="go">ABRIR &#9656;</span></a></div></details></section>
+  <section class="bloque"><div class="bcab"><div class="fl"><span class="ic">&#128196;</span><h2>Planos y catalogos en PDF</h2></div><span class="cnt">18 PDF</span></div><details><summary><span class="ic">&#128196;</span><span class="tx"><b>Abrir la lista de los 18 PDF</b><small>751 laminas acotadas &amp;middot; uno por uno</small></span><span class="chev">&#9656;</span></summary><div class="lista"><a class="sub" data-l="p01" target="_blank" rel="noopener"><span class="nm">01</span><span class="st"><b>100 Planos de Melamina (Despieces)</b><small>103 paginas · 86 laminas acotadas</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="p02" target="_blank" rel="noopener"><span class="nm">02</span><span class="st"><b>Catalogo de Armarios</b><small>60 paginas · 47 laminas acotadas</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="p03" target="_blank" rel="noopener"><span class="nm">03</span><span class="st"><b>Cocinas</b><small>31 paginas · 31 laminas acotadas</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="p04" target="_blank" rel="noopener"><span class="nm">04</span><span class="st"><b>Libro de Cocinas</b><small>77 paginas · 6 laminas acotadas</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="p05" target="_blank" rel="noopener"><span class="nm">05</span><span class="st"><b>Nuevo Libro de Cocina Avanzado</b><small>101 paginas · 51 laminas acotadas</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="p06" target="_blank" rel="noopener"><span class="nm">06</span><span class="st"><b>Muebles de Cocina</b><small>75 paginas · 5 laminas acotadas</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="p07" target="_blank" rel="noopener"><span class="nm">07</span><span class="st"><b>Disenar Cocina</b><small>12 paginas · 3 laminas acotadas</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="p08" target="_blank" rel="noopener"><span class="nm">08</span><span class="st"><b>Centro de TV y Entretenimiento</b><small>31 paginas · 31 laminas acotadas</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="p09" target="_blank" rel="noopener"><span class="nm">09</span><span class="st"><b>Comodas y Libreros</b><small>30 paginas · 29 laminas acotadas</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="p10" target="_blank" rel="noopener"><span class="nm">10</span><span class="st"><b>Escritorios</b><small>31 paginas · 31 laminas acotadas</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="p11" target="_blank" rel="noopener"><span class="nm">11</span><span class="st"><b>Roperos</b><small>31 paginas · 31 laminas acotadas</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="p12" target="_blank" rel="noopener"><span class="nm">12</span><span class="st"><b>Muebles Infantiles</b><small>40 paginas · 0 laminas acotadas</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="p13" target="_blank" rel="noopener"><span class="nm">13</span><span class="st"><b>Manual Melamina</b><small>298 paginas · 0 laminas acotadas</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="p14" target="_blank" rel="noopener"><span class="nm">14</span><span class="st"><b>Muebles de Melamina</b><small>94 paginas · 93 laminas acotadas</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="p15" target="_blank" rel="noopener"><span class="nm">15</span><span class="st"><b>Melamina y Planos (Conozcamos mas)</b><small>69 paginas · 11 laminas acotadas</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="p16" target="_blank" rel="noopener"><span class="nm">16</span><span class="st"><b>Planos Drywall</b><small>76 paginas · 51 laminas acotadas</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="p17" target="_blank" rel="noopener"><span class="nm">17</span><span class="st"><b>Variados</b><small>16 paginas · 16 laminas acotadas</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="p18" target="_blank" rel="noopener"><span class="nm">18</span><span class="st"><b>Bono: Mueble Industrial (Metal + Madera)</b><small>381 paginas · 285 laminas acotadas</small></span><span class="go">ABRIR &#9656;</span></a></div></details></section>
+  <section class="bloque"><div class="bcab"><div class="fl"><span class="ic">&#128230;</span><h2>Mega Pack de planos</h2></div><span class="cnt">5 carpetas</span></div><details><summary><span class="ic">&#128230;</span><span class="tx"><b>Abrir las 5 carpetas del Mega Pack</b><small>catalogo, guia teorica, SketchUp Pro y mas</small></span><span class="chev">&#9656;</span></summary><div class="lista"><a class="sub" data-l="m01" target="_blank" rel="noopener"><span class="nm">01</span><span class="st"><b>Catalogo en Melamina</b><small>carpeta de Drive</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="m02" target="_blank" rel="noopener"><span class="nm">02</span><span class="st"><b>Guia Teorica</b><small>carpeta de Drive</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="m03" target="_blank" rel="noopener"><span class="nm">03</span><span class="st"><b>SketchUp Pro</b><small>carpeta de Drive</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="m04" target="_blank" rel="noopener"><span class="nm">04</span><span class="st"><b>Ejemplos y Tips para tus Armados</b><small>carpeta de Drive</small></span><span class="go">ABRIR &#9656;</span></a><a class="sub" data-l="m05" target="_blank" rel="noopener"><span class="nm">05</span><span class="st"><b>Bono: Habitos Pro</b><small>carpeta de Drive</small></span><span class="go">ABRIR &#9656;</span></a></div></details></section>
+  <section class="bloque"><div class="bcab"><div class="fl"><span class="ic">&#128218;</span><h2>Mas planos y libros</h2></div><span class="cnt">2 carpetas</span></div><div class="fila"><span class="ic">&#128209;</span><span class="tx"><b>Packs de laminas acotadas de melamina</b><small>5 PDF · 710 paginas · 427 laminas nuevas</small></span><a class="btn" data-l="pk" target="_blank" rel="noopener">ABRIR &#9656;</a></div><div class="fila"><span class="ic">&#128218;</span><span class="tx"><b>Libros de Muebles Industriales y mas</b><small>carpeta de Drive</small></span><a class="btn" data-l="lib" target="_blank" rel="noopener">ABRIR &#9656;</a></div><div class="nota"><b>En los packs de laminas hay:</b><ul><li>Despiece de Muebles de Melamina (86 laminas acotadas)</li><li>Despiece de Muebles de Melamina PDF (85 laminas acotadas)</li><li>Diseno de Muebles en Melamina (157 laminas acotadas)</li><li>Megapack Planos Muebles Industriales (225 Pag.) (96 laminas acotadas)</li><li>Planos Gratis para Muebles de Melamina (87 laminas acotadas)</li></ul></div></section>
+  <section class="bajar"><div class="bcab"><div class="fl"><span class="ic">&#11015;&#65039;</span><h2>&amp;iquest;Prefieres bajarlo todo de una?</h2></div><span class="cnt">carpetas completas</span></div><p class="int">Aca estan las carpetas grandes de Drive, todas juntas. Si preferis ir seccion por seccion, subite a los bloques de arriba.</p><div class="fila"><span class="ic">&#128193;</span><span class="tx"><b>Todo el curso en video, en una sola carpeta</b><small>las 15 secciones juntas · 563 archivos</small></span><a class="btn" data-l="todocurso" target="_blank" rel="noopener">ABRIR &#9656;</a></div><div class="fila"><span class="ic">&#128193;</span><span class="tx"><b>Todo el Mega Pack, en una sola carpeta</b><small>las 5 carpetas juntas</small></span><a class="btn" data-l="todomega" target="_blank" rel="noopener">ABRIR &#9656;</a></div></section>
+
+  <div class="soporte">
+    <h2>&#128736;&#65039; &iquest;Algo no te abre?</h2>
+    <p>Decinos cual archivo y te lo mandamos de nuevo. Contestamos nosotros mismos.</p>
+    <div class="btns">
+      <a class="btn" href="https://wa.me/18575295509?text=Hola%2C%20compre%20el%20curso%20MELAMINA%20PRO%20y%20necesito%20ayuda%20con%20mi%20acceso" target="_blank" rel="noopener">&#128172; WhatsApp de soporte</a>
+      <a class="btn" href="mailto:whproperties.tx@gmail.com?subject=Ayuda%20con%20mi%20acceso%20a%20MELAMINA%20PRO">&#9993;&#65039; Escribir al correo</a>
+    </div>
+    <small class="cor">whproperties.tx@gmail.com &middot; WhatsApp +1 857 529 5509</small>
+  </div>
+
+  <footer>
+    <span class="logo"><img class="mark" src="../img/logo-glow-128.png" width="42" height="42" alt="" decoding="async">MELAMINA<span class="sub">PRO</span></span>
+    <p>&copy; 2026 &middot; Melamina Pro</p>
+  </footer>
+
+</div>
+
+<script>(function(){
+  /* Los destinos van en base64: fuera del HTML plano, igual que en el molde de las
+     4 zonas de CapCut. No es seguridad, es no regalar la biblioteca a un scraper. */
+  var L={"c01": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMWNnYkp6NzY4SzNLa2Q4ZmxLYng0bmdXWEZ6eEhURXIt", "c02": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMWlrU2pRTW8wMGJIekdJSHhaM082U01sMTNWbTZEZkg3", "c03": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMU0tUWZ4TlNwV05fRkdnRURmamVRUkZ1S0t3VWRQcElS", "c04": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMUFTSlVFS1pwU1BpaHp2Ukh5MVh5YTFuSUltaHZ6ZlRt", "c05": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMWwyVkdBN2ZpeEtoNHBwSE50UFZwVUY2MGJDNDJFcWp4", "c06": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMVN1bWZuZVZkal9VSEpPUV9hanhycEVwN1VrcEJJd3JG", "c07": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMWEyNmtlWHQxMXZVRC16TXJrbUJDM3dXNlFiY2xTYTEt", "c08": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMUZEdGxQQUdLZ0dvdDhXNXNMRUZ5b1FRbkJJRDJNb0w1", "c09": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMXdmVzd5OWdZR0taWmNnXzU1U194eExZQXFsY3k0SGtH", "c10": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMXBVVENra251b0J6akFDOXJoOVBBaUMwUjctVHAxRzlZ", "c11": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMVZmTFJDeVgzRk80MXY1dnhfMGJiMWNqaGV2blhKMFhm", "c12": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMS1tOEFhUE9wbjhrYkExWFlBVUZmZTdWMWFlaUFUQUZC", "c13": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMXp0c2pDT1dNMHlNSnVlREpGOHQ2alRnTVFHT29UX2N3", "c14": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMUNPcVRialRHYlFWejBKekFlcWpvZndxWXUwVU4xVGdR", "c15": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMUdVVk5kX1lBcUE4Q3EzUmJuUVZwc3NEMVdnTTd6OXNX", "lib": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMXJaSkl1QU9rQ0E0OXMxdnQ5NXRtblJmNnkyS3BCbUlx", "m01": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMWR5NjU3RW1jejFmdkx5bGZUSkVUZVdpdDVmekIwSFFJ", "m02": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMVZmSmxJVHhaUVRDWld0YjlSOGdzNlVNbWxfNXNBT2t0", "m03": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMTA3Yk1XdFhFeTNPTXZrNGVINEZ1bnBXTUNtUWxoMFEz", "m04": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMXZnY25aUUhKbHJXNXhYaG04RlNPMmp5c0NiUVR4WkRM", "m05": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMUk4dXVIWXJxaUd0V2MwclMxenNlMnVPYVEtckhaMnYx", "p01": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xbGNnRDdwbU9yZTFlRTFlZzJrR0hyWnlidjBZOExRdlMvdmlldw==", "p02": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xeFE4ZmxHY19VYUVPcmhaRkFmQm1DVWhvekNuaDVfUmovdmlldw==", "p03": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xNDdqTnRxTFUxYzQ0R19fT3hLZDBlZXhwWnNsMzJNOUEvdmlldw==", "p04": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xZTRqYThQT2locWctcWZlaHNDcENfNDhaN2N5LTd6bnYvdmlldw==", "p05": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xQUZwbXBPREd1QnZrZmQ5Qkk1dnhCWlBXQVJ5R3lOdVIvdmlldw==", "p06": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xOWpkUTFxLU10S29HRmhKSkotSTJocU43dTlDQlhXd08vdmlldw==", "p07": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xMG9heHVydGZUUERaOWMyd0RtUDVLcElackZxSEh0cFAvdmlldw==", "p08": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xUUlmYWJxT2RYUGN5eHlzX2dBWEFiNzl6dkVsSmF2VEwvdmlldw==", "p09": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xTXZOdWpleWU3TDRhblhUMXRPS2xGS2ktZXRVcVRjUW4vdmlldw==", "p10": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xd0o1XzFyNXJXc3RsYUNVeDhwdXhNelMtQVVWRE8xV2Qvdmlldw==", "p11": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xYTZwN1ZyMXU5dGdSOWMxU2o3SXVMY1BjVVBWMTJzQ2gvdmlldw==", "p12": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xaUlqWkRwbUcyMWhzbGMzbGFGRmUzMkdxZ2s0d211UFYvdmlldw==", "p13": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xdzJHVHg4dzhDenNiUUx1WHhkdWVtUUlJQldlcFVOZVgvdmlldw==", "p14": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xeFU3dDhfWlhqZGo3aGQ5QjZYTEFfQ2tjcjI5Q21hM1Mvdmlldw==", "p15": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xV1U2blNIZldNYUhkdGZWV0dKVTBVamFod3A4ejJmSVovdmlldw==", "p16": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xTmE1eTUwekdSV2ZBdVBVVHl3RFA2VnpNRU5vWVl2Tk0vdmlldw==", "p17": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xS3hvS0NGRVhnX1VDR1hHNHN5TVlhNGN2cnJCUW9ha2ovdmlldw==", "p18": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xUy1ybDg3Yld6RnhTVUVMNXdPQzRSWGVmUDh5emFaLWsvdmlldw==", "pk": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMVlwWmUwSUNSSjhkSDhpaVExUjF3TzJKWnZoODV6REFh", "todocurso": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMVl5eHdjTW9ySkJPOGUzR1VNSEtMNFpYVXlBUkF6Y0tx", "todomega": "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMWZ4aXN6R0NXOGxKZFZYeHVmc1hxeGtLMWszQmxrMGxu"};
+  document.querySelectorAll('[data-l]').forEach(function(a){ a.href = atob(L[a.dataset.l]); });
+  var u = location.href.split('#')[0].split('?')[0];
+  var wa = document.getElementById('g-wa'); if(wa) wa.href='https://wa.me/?text='+encodeURIComponent('Mi acceso a MELAMINA PRO: '+u);
+  var ml = document.getElementById('g-mail'); if(ml) ml.href='mailto:?subject='+encodeURIComponent('Mi acceso a MELAMINA PRO')+'&body='+encodeURIComponent('Guarda este enlace, es tu acceso de por vida: '+u);
+  var cp = document.getElementById('g-copy'), ok = document.getElementById('g-ok');
+  if(cp) cp.addEventListener('click', function(){
+    function listo(){ ok.textContent='Enlace copiado. Guardalo donde no se te pierda.'; }
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(u).then(listo, pelado); } else { pelado(); }
+    function pelado(){ /* fail-safe: sin clipboard igual se puede copiar a mano */
+      var t=document.createElement('textarea'); t.value=u; t.setAttribute('readonly','');
+      t.style.position='absolute'; t.style.left='-9999px'; document.body.appendChild(t);
+      t.select(); try{ document.execCommand('copy'); listo(); }catch(x){ ok.textContent='Copia el enlace de la barra de arriba: '+u; }
+      document.body.removeChild(t);
+    }
+  });
+})();</script>
+</body>
+</html>
