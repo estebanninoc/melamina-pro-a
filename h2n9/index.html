@@ -127,31 +127,7 @@
          box-shadow:inset 0 1px 0 0 rgba(255,106,19,.14)}
 </style>
 <!--GLOW:[{"nombre": "header_marca", "css": "radial-gradient del <header>", "rgb": "#ff6a13", "alfa": 0.3, "base": "#0f0b06", "textos": ["tx", "mut"]}, {"nombre": "halo_hero_crema", "css": "segundo radial-gradient del <header>", "rgb": "#fff8b5", "alfa": 0.07, "base": "#0f0b06", "textos": ["tx", "mut"]}, {"nombre": "velo_footer", "css": "linear-gradient del footer", "rgb": "#ff6a13", "alfa": 0.06, "base": "#0f0b06", "textos": ["tx", "mut"]}]-->
-<script>
-/* PIXEL DE META en la ZONA DE ENTREGA (obra purchase-melamina, 2026-09-27).
-   El MISMO snippet y el MISMO id que las 2 landings de venta: un solo dataset
-   mide el embudo entero. Hasta hoy estas 4 zonas no tenian pixel (medido: fbq=0
-   en las 4), o sea el lado navegador del post-pago no existia.
 
-   AQUI SOLO VA PageView. El Purchase NO se dispara desde el navegador porque
-   el navegador NO PUEDE PROBAR QUE LA SESION ESTA PAGADA: no hay ni va a haber
-   un secreto de Stripe en el cliente, y esta pagina se abre con solo pegar la
-   URL. El Purchase sale del servidor (tools/capi_melamina.py, event_id =
-   session.id, value real de Stripe). Disparar uno aqui sin prueba de pago
-   inventaria ventas.
-
-   El gancho del Purchase verificado esta escrito abajo y APAGADO: se prende
-   poniendo la URL del verificador en VERIF_URL, y no antes. */
-var PIXEL_ID = '1111081301276455';
-if (PIXEL_ID) {
-  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-  document,'script','https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', PIXEL_ID); fbq('track','PageView');
-}
-</script>
 </head>
 <body>
 <nav><div class="wrap"><span class="logo"><img src="../img/logo-mark-256.png" width="40" height="40" alt="" decoding="async">MELAMINA<span class="sb">PRO</span></span><span class="navtag">ACCESO ACTIVO</span></div></nav>
@@ -258,73 +234,81 @@ if (PIXEL_ID) {
   });
 })();</script>
 <script>
-/* ══ Purchase VERIFICADO — obra verificador-nh-propio, 2026-09-27 ════════════
-   PRENDIDO. Pega contra NUESTRO endpoint, no contra Apps Script (orden de
-   Esteban del 27-sep: "montá la verificación en tu propio servidor").
+/* ══ Purchase por CAPI — obra capi-purchase-melamina, 2026-09-27 ═════════════
+   ORDEN DE ESTEBAN (textual, hoy): "El Purchase queda todo de tu lado, solo por
+   CAPI. No metemos pixel de navegador en las zonas de entrega, porque esa URL se
+   escribe a mano y nos envenenaria la optimizacion justo cuando la cambiemos a
+   compra."
 
-   POR QUE ASI Y NO DE OTRA FORMA:
-   - El navegador NO puede validar el pago. Esta pagina se abre pegando la URL.
-     Un Purchase disparado aca "porque la pagina cargo" cuenta ventas que no
-     existen. Por eso el gancho no cree nada de lo que ve: pregunta.
-   - El endpoint re-consulta Stripe con la rk_ de SOLO LECTURA de esta tienda y
-     devuelve {ok,value,currency,event_id}. Sin `ok:true` no se dispara nada.
-   - value y currency salen de STRIPE, nunca de esta pagina. Prohibido el 9.99
-     fijo, prohibido derivarlo del huso horario y prohibido leerlo del nivel de
-     la zona: el cobro pudo salir en cualquiera de las 15 monedas del price.
-   - FALLA CERRADO: endpoint caido, CORS roto, timeout, JSON raro => NO se manda
-     nada. Preferimos perder la senal de una venta real antes que inventar una.
+   ESTA ZONA NO TIENE PIXEL. Ni `init`, ni `PageView`, ni `Purchase`: los tres se
+   retiraron hoy (los habia puesto otra obra esta manana). `fbq` NO EXISTE en esta
+   pagina y no se carga fbevents.js. Lo unico que sale de aca es este aviso al
+   servidor, y no es una medicion: es un dato de entrada.
 
-   🔴 EL event_id LO MANDA EL SERVIDOR, NO ESTA PAGINA.
-   `d.event_id` es `purchase_<session_id>` y es EL MISMO STRING que manda
-   tools/capi_melamina.py por CAPI. Ese string compartido es lo unico que evita
-   que Meta cuente la venta dos veces (en CapCut conto 6 donde hubo 4). Si aca
-   se armara el id a mano, cualquier cambio de un lado rompe el dedup del otro
-   en silencio: por eso se usa el que vino en la respuesta y no se toca.
+   POR QUE, Y ES LA RAZON DE ESTEBAN. Una zona de entrega es POST-PAGO y su URL se
+   escribe A MANO: `/q7x4/?session_id=...`. Un Purchase disparado por el navegador
+   "porque la pagina cargo" es una venta inventada. Y en cuanto las 2 campanas
+   optimicen A COMPRA, cada venta falsa le ensena a Meta a buscar mas gente como
+   quien la invento: el dano no es el evento de mas, es el aprendizaje que se
+   construye encima. El navegador no puede probar un pago y nunca va a poder --
+   no hay ni va a haber un secreto de Stripe en el cliente.
 
-   EL TOKEN NO ES UN SECRETO Y NO PRETENDE SERLO: esta en el fuente de una
-   pagina publica, cualquiera lo lee. Frena el escaneo generico para que no nos
-   gaste llamadas a Stripe. El candado real es el otro: solo una sesion que
-   Stripe reporta `paid` devuelve ok:true, y la rk_ nunca sale del servidor.
+   QUE HACE ESTE BEACON: le pasa al servidor el `session_id` y las cookies de
+   emparejamiento. NADA MAS. No mide, no cuenta, y no recibe de vuelta ningun
+   numero que pueda usar para medir. El servidor re-consulta la sesion en Stripe
+   con su clave de SOLO LECTURA, exige `payment_status == 'paid'`, y manda el
+   Purchase el mismo con el `value` y la moneda REALES del cobro, una sola vez
+   por sesion (marca compartida con el cron horario).
 
-   REVERSA DE 1 LINEA:  var VERIF_URL = '';                                  */
-var VERIF_URL = 'https://heliosnetwork.co/verif-nh/verif';
-var VERIF_K   = 'wMl8KH_7QKqvWN3CGnRj0JJCJf3nwA79';
+   SI ESTE BEACON NO SALE no se pierde la venta: el cron horario
+   (tools/capi_melamina.py) manda ese mismo Purchase con el mismo event_id
+   `purchase_<session_id>`. Este beacon es la via RAPIDA; el cron es la red.
+
+   EL TOKEN NO ES UN SECRETO Y NO PRETENDE SERLO: esta en el fuente de una pagina
+   publica. Frena el escaneo generico para que no nos gaste llamadas a Stripe. El
+   candado real es el otro: solo una sesion que Stripe reporta `paid` produce un
+   evento, y la clave de Stripe nunca sale del servidor.
+
+   REVERSA DE 1 LINEA:  var CAPI_URL = '';
+     (la zona queda muda y el Purchase sale solo por el cron horario)          */
+var CAPI_URL = 'https://api.melamina.pro:8443/capi';
+var CAPI_K   = 'wMl8KH_7QKqvWN3CGnRj0JJCJf3nwA79';
 
 (function(){
-  if(!VERIF_URL) return;                       /* apagado: no se hace nada */
-  if(typeof window.fbq!=='function') return;   /* sin pixel no hay a quien contarle */
+  if(!CAPI_URL) return;                       /* apagado: no se hace nada */
   var sid=null;
   try{ sid=new URLSearchParams(location.search).get('session_id'); }catch(e){}
+  /* el MISMO formato que exige el servidor: lo que no matchea no llega a salir */
   if(!sid || !/^cs_live_[A-Za-z0-9]{20,120}$/.test(sid)) return;
-  /* una sola vez por sesion del navegador: recargar la pagina no re-cuenta */
-  try{ if(sessionStorage.getItem('mpPurch')===sid) return; }catch(e){}
+  /* recargar no repite el aviso. Es cortesia, no el candado: el candado duro es
+     del servidor (una marca por session_id, compartida con el cron). Por eso se
+     marca al RECIBIR respuesta y no antes: si el endpoint esta caido, un F5
+     vuelve a intentar. */
+  try{ if(sessionStorage.getItem('mpCapi')===sid) return; }catch(e){}
 
-  /* fbp/fbc: los puso el pixel en la landing de venta. La cookie es de
-     .melamina.pro, asi que viaja hasta aca. Se los pasamos al servidor para que
-     el Purchase de CAPI tenga con que emparejar -- es la palanca real de
-     calidad (el Purchase de CapCut mide 3.2/10). Si no estan, el evento sale
-     igual sin ellos: son una mejora, no un requisito. */
   function ck(n){
     try{
       var m=document.cookie.match('(^|;)\\s*'+n+'\\s*=\\s*([^;]+)');
       return m?m.pop():'';
     }catch(e){ return ''; }
   }
-  var q='?sid='+encodeURIComponent(sid)+'&k='+encodeURIComponent(VERIF_K);
+  /* _fbp/_fbc los puso el pixel de la LANDING DE VENTA (ahi si vive, con PageView
+     e InitiateCheckout). La cookie es de .melamina.pro, asi que viaja hasta aca
+     AUNQUE esta pagina no tenga pixel. Son la palanca real de emparejamiento: el
+     Purchase de CapCut mide 3.2/10 por no tenerlos. Si faltan, el evento sale
+     igual sin ellos: son una mejora, no un requisito. */
+  var q='?ev=Purchase&sid='+encodeURIComponent(sid)+'&k='+encodeURIComponent(CAPI_K);
   var fbp=ck('_fbp'), fbc=ck('_fbc');
   if(fbp) q+='&fbp='+encodeURIComponent(fbp);
   if(fbc) q+='&fbc='+encodeURIComponent(fbc);
 
-  fetch(VERIF_URL+q,{method:'GET',credentials:'omit'}).then(function(r){
-    return r.ok ? r.json() : null;
-  }).then(function(d){
-    if(!d || d.ok!==true) return;              /* sin prueba de pago, no se cuenta */
-    if(typeof d.value!=='number' || !(d.value>0) || !d.currency) return;
-    if(!d.event_id) return;                    /* sin id compartido, Meta duplicaria */
-    fbq('track','Purchase',{value:d.value,currency:String(d.currency).toUpperCase()},
-        {eventID:d.event_id});
-    try{ sessionStorage.setItem('mpPurch',sid); }catch(e){}
-  }).catch(function(){ /* el verificador caido NO rompe la entrega */ });
+  /* FALLA CERRADO Y MUDO: endpoint caido, CORS, timeout, bloqueador => no sale
+     nada y la ENTREGA DEL CURSO no se toca. Primero entregar, despues medir. */
+  try{
+    fetch(CAPI_URL+q,{method:'POST',credentials:'omit',keepalive:true})
+      .then(function(){ try{ sessionStorage.setItem('mpCapi',sid); }catch(e){} })
+      .catch(function(){});
+  }catch(e){}
 })();
 </script>
 </body>
