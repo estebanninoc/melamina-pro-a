@@ -194,6 +194,31 @@
 </style>
 <!--CONTRASTE: este manifiesto DECLARA lo que la pagina pinta, pero el medidor canonico ya no es el: desde la v6 el contraste se mide resolviendo el CSS contra el DOM (cada nodo con letra vs el fondo que hereda, con los gradientes muestreados en 11 puntos). 1014 pares unicos, piso 7:1, peor 7.049 (ink sobre el naranja del navtag, preexistente). Por eso NINGUN gradiente va debajo de la letra --ink. -->
 <!--GLOW:[{"nombre": "header_marca", "css": "radial-gradient del <header>", "rgb": "#ff6a13", "alfa": 0.3, "base": "#0f0b06", "textos": ["tx", "mut"]}, {"nombre": "cinta_curso", "css": "fondo del chip de familia CURSO", "rgb": "#ff6a13", "alfa": 1.0, "base": "#1f160f", "textos": ["ink"]}, {"nombre": "cinta_planos", "css": "fondo del chip de familia PLANOS", "rgb": "#47bcff", "alfa": 1.0, "base": "#1f160f", "textos": ["ink"]}, {"nombre": "cinta_mixto", "css": "fondo del chip de familia MIXTO", "rgb": "#2d2015", "alfa": 1.0, "base": "#1f160f", "textos": ["tx"]}, {"nombre": "anillo_naranja", "css": "box-shadow 0 0 0 1px de .guardar y .f-curso", "rgb": "#ff6a13", "alfa": 0.16, "base": "#0f0b06", "textos": []}, {"nombre": "borde_curso", "css": "border-color del .bloque de CURSO", "rgb": "#ff6a13", "alfa": 0.45, "base": "#1f160f", "textos": []}, {"nombre": "halo_guardar", "css": "box-shadow difuso de .guardar", "rgb": "#ff6a13", "alfa": 0.8, "base": "#0f0b06", "textos": []}, {"nombre": "halo_curso", "css": "box-shadow difuso del .bloque de CURSO", "rgb": "#ff6a13", "alfa": 0.9, "base": "#0f0b06", "textos": []}, {"nombre": "anillo_planos", "css": "box-shadow 0 0 0 1px del .bloque de PLANOS", "rgb": "#47bcff", "alfa": 0.16, "base": "#0f0b06", "textos": []}, {"nombre": "borde_planos", "css": "border-color del .bloque de PLANOS", "rgb": "#47bcff", "alfa": 0.45, "base": "#1f160f", "textos": []}, {"nombre": "halo_planos", "css": "box-shadow difuso del .bloque de PLANOS", "rgb": "#47bcff", "alfa": 0.9, "base": "#0f0b06", "textos": []}, {"nombre": "halo_hero_crema", "css": "segundo radial-gradient del <header> (v6)", "rgb": "#fff8b5", "alfa": 0.07, "base": "#0f0b06", "textos": ["tx", "mut"]}, {"nombre": "grad_panel_g", "css": "--g: linear-gradient(150deg,panel2,bg) — .aviso, .fila, summary", "rgb": "#261c12", "alfa": 1.0, "base": "#0f0b06", "textos": ["tx", "mut", "dim"]}, {"nombre": "grad_panel_g2", "css": "--g2: linear-gradient(150deg,panel,bg) — .bloque, .respaldo", "rgb": "#1f160f", "alfa": 1.0, "base": "#0f0b06", "textos": ["tx", "mut", "dim"]}, {"nombre": "grad_panel_g3", "css": "--g3: linear-gradient(150deg,panel3,panel) — .go, .chev, .fam mixto", "rgb": "#2d2015", "alfa": 1.0, "base": "#1f160f", "textos": ["tx"]}, {"nombre": "grad_guardar", "css": "linear-gradient(160deg,panel2,bg) de .guardar (v6)", "rgb": "#261c12", "alfa": 1.0, "base": "#0f0b06", "textos": ["tx", "mut", "acc2"]}, {"nombre": "grad_familia", "css": "linear-gradient(150deg,panel2,bg) de .f-curso y .f-planos (v6)", "rgb": "#261c12", "alfa": 1.0, "base": "#0f0b06", "textos": ["tx", "mut", "dim"]}, {"nombre": "grad_btn_secundario", "css": "linear-gradient(150deg,panel3,panel) de .btns a/button (v6)", "rgb": "#2d2015", "alfa": 1.0, "base": "#1f160f", "textos": ["tx"]}, {"nombre": "grad_nav", "css": "linear-gradient(180deg,rgba(31,22,15,.94),rgba(15,11,6,.90)) del nav (v6)", "rgb": "#1f160f", "alfa": 0.94, "base": "#0f0b06", "textos": ["tx", "acc2"]}, {"nombre": "velo_lista", "css": "linear-gradient(180deg,rgba(acc,.05),transparent) de .lista (v6)", "rgb": "#ff6a13", "alfa": 0.05, "base": "#1f160f", "textos": ["tx", "dim"]}, {"nombre": "velo_footer", "css": "linear-gradient(180deg,transparent,rgba(acc,.06)) del footer (v6)", "rgb": "#ff6a13", "alfa": 0.06, "base": "#0f0b06", "textos": ["mut"]}]-->
+<script>
+/* PIXEL DE META en la ZONA DE ENTREGA (obra purchase-melamina, 2026-09-27).
+   El MISMO snippet y el MISMO id que las 2 landings de venta: un solo dataset
+   mide el embudo entero. Hasta hoy estas 4 zonas no tenian pixel (medido: fbq=0
+   en las 4), o sea el lado navegador del post-pago no existia.
+
+   AQUI SOLO VA PageView. El Purchase NO se dispara desde el navegador porque
+   el navegador NO PUEDE PROBAR QUE LA SESION ESTA PAGADA: no hay ni va a haber
+   un secreto de Stripe en el cliente, y esta pagina se abre con solo pegar la
+   URL. El Purchase sale del servidor (tools/capi_melamina.py, event_id =
+   session.id, value real de Stripe). Disparar uno aqui sin prueba de pago
+   inventaria ventas.
+
+   El gancho del Purchase verificado esta escrito abajo y APAGADO: se prende
+   poniendo la URL del verificador en VERIF_URL, y no antes. */
+var PIXEL_ID = '1111081301276455';
+if (PIXEL_ID) {
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', PIXEL_ID); fbq('track','PageView');
+}
+</script>
 </head>
 <body>
 <nav><div class="wrap"><span class="logo"><img src="../img/logo-mark-256.png" width="40" height="40" alt="" decoding="async">MELAMINA<span class="sb">PRO</span></span><span class="navtag">ACCESO ACTIVO</span></div></nav>
@@ -283,5 +308,47 @@
     }
   });
 })();</script>
+<script>
+/* ══ Purchase VERIFICADO — obra purchase-melamina, 2026-09-27 ════════════════
+   ESTA APAGADO A PROPOSITO. VERIF_URL='' => no hace una sola peticion y no
+   manda un solo evento. Se prende pegando la URL del /exec verificador, y solo
+   despues de que ese /exec este desplegado (exige login de Google: no hay API).
+
+   POR QUE ASI Y NO DE OTRA FORMA:
+   - El navegador NO puede validar el pago. Esta pagina se abre pegando la URL.
+     Un Purchase disparado aca "porque la pagina cargo" cuenta ventas que no
+     existen. Por eso el unico Purchase que sale hoy es el del servidor.
+   - El verificador re-consulta Stripe con la rk_ de ESTA tienda y devuelve
+     {paid,value,currency}. Sin un `paid:true` de ese endpoint, no se dispara.
+   - value y currency salen de STRIPE, nunca de esta pagina. Prohibido el 9.99
+     fijo, prohibido derivarlo del huso horario y prohibido leerlo del nivel de
+     la zona: el cobro pudo salir en cualquiera de las 15 monedas del price.
+   - event_id = session_id, el MISMO que manda la CAPI. Ese id compartido es lo
+     unico que evita que Meta cuente la venta dos veces (en CapCut conto 6
+     donde hubo 4).
+
+   REVERSA DE 1 LINEA:  var VERIF_URL = '';                                  */
+var VERIF_URL = '';
+
+(function(){
+  if(!VERIF_URL) return;                       /* apagado: no se hace nada */
+  if(typeof window.fbq!=='function') return;   /* sin pixel no hay a quien contarle */
+  var sid=null;
+  try{ sid=new URLSearchParams(location.search).get('session_id'); }catch(e){}
+  if(!sid || !/^cs_(live|test)_[A-Za-z0-9]+$/.test(sid)) return;
+  /* una sola vez por sesion del navegador: recargar la pagina no re-cuenta */
+  try{ if(sessionStorage.getItem('mpPurch')===sid) return; }catch(e){}
+  var u=VERIF_URL+(VERIF_URL.indexOf('?')<0?'?':'&')+'session_id='+encodeURIComponent(sid);
+  fetch(u,{method:'GET',redirect:'follow'}).then(function(r){
+    return r.ok ? r.json() : null;
+  }).then(function(d){
+    if(!d || d.paid!==true) return;            /* sin prueba de pago, no se cuenta */
+    if(typeof d.value!=='number' || !(d.value>0) || !d.currency) return;
+    fbq('track','Purchase',{value:d.value,currency:String(d.currency).toUpperCase()},
+        {eventID:sid});
+    try{ sessionStorage.setItem('mpPurch',sid); }catch(e){}
+  }).catch(function(){ /* el verificador caido NO rompe la entrega */ });
+})();
+</script>
 </body>
 </html>
