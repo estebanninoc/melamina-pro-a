@@ -331,7 +331,7 @@ var EZ_URL = 'https://api.melamina.pro:8444/accesos';
 var EZ_K   = 'qwS6iu4Kv7m2DkX4DJsslYZ7nw5fQUDg';
 var EZ_T   = 'melamina';
 var EZ_Z   = 'h2n9';
-var EZ_SOP = 'Escribinos por WhatsApp al <b><a href="https://wa.me/18575295509?text=Hola%2C%20compre%20el%20curso%20MELAMINA%20PRO%20y%20necesito%20ayuda%20con%20mi%20acceso" style="color:#fde68a">+1 (857) 529-5509</a></b> o a <b>whproperties.tx@gmail.com</b> con el correo con el que pagaste y te lo abrimos a mano.';
+var EZ_SOP = 'Escríbenos por WhatsApp al <b><a href="https://wa.me/18575295509?text=Hola%2C%20compre%20el%20curso%20MELAMINA%20PRO%20y%20necesito%20ayuda%20con%20mi%20acceso" style="color:#fde68a">+1 (857) 529-5509</a></b> o a <b>whproperties.tx@gmail.com</b> con el correo con el que pagaste y te lo abrimos a mano.';
 
 (function(){
   var d = document, ID = 'ez-aviso';
@@ -355,13 +355,13 @@ var EZ_SOP = 'Escribinos por WhatsApp al <b><a href="https://wa.me/18575295509?t
     /* Los enlaces YA estan muertos (nacen sin href). No hay nada que apagar. */
     try{ if(window.console) console.log('entrega cerrada:', motivo); }catch(e){}
     var m = {
-      'falta':     'Este enlace está incompleto: le falta tu <b>código de compra</b>.<br>Abrí el enlace tal como te llegó en el correo de compra, completo.',
-      'formato':   'Este enlace está incompleto: le falta tu <b>código de compra</b>.<br>Abrí el enlace tal como te llegó en el correo de compra, completo.',
+      'falta':     'Este enlace está incompleto: le falta tu <b>código de compra</b>.<br>Abre el enlace completo, tal como te quedó después de pagar.',
+      'formato':   'Este enlace está incompleto: le falta tu <b>código de compra</b>.<br>Abre el enlace completo, tal como te quedó después de pagar.',
       'ajena':     'No encontramos tu compra con este código.<br>Puede que sea de otro curso o que el enlace esté cortado.',
-      'sin_pago':  'Tu pago todavía no está confirmado. Si pagaste en efectivo puede tardar unas horas.<br>Volvé a abrir este mismo enlace más tarde.',
-      'otro_nivel':'Este código corresponde a <b>otro paquete</b>, no a este.<br>Abrí el enlace que te llegó en tu correo de compra.',
+      'sin_pago':  'Tu pago todavía no está confirmado. Si pagaste en efectivo puede tardar unas horas.<br>Vuelve a abrir este mismo enlace más tarde.',
+      'otro_nivel':'Este código corresponde a <b>otro paquete</b>, no a este.<br>Abre el enlace completo, tal como te quedó después de pagar.',
       'sin_nivel': 'No pudimos identificar qué paquete compraste.',
-      'red':       'No pudimos verificar tu compra en este momento.<br>Volvé a cargar la página en un minuto.'
+      'red':       'No pudimos verificar tu compra en este momento.<br>Vuelve a cargar la página en un minuto.'
     };
     aviso(m[motivo] || m['red']);
   }
