@@ -384,14 +384,20 @@ var EZ_SOP = 'Escríbenos por WhatsApp al <b><a href="https://wa.me/18575295509?
   try{ sid = new URLSearchParams(location.search).get('session_id'); }catch(e){}
   /* el MISMO formato que exige el servidor. Lo que no matchea no sale de aca:
      esa URL la escribe cualquiera y no se le pega un id crudo a Stripe. */
-  if(!sid || !/^cs_live_[A-Za-z0-9]{20,120}$/.test(sid)){ return cerrado('falta'); }
+  /* ZONA ABIERTA (orden de Esteban, 2026-10-07: "abre los links asi como los de
+     CapCut y gamebox"). El correo de entrega manda el link SIN el codigo, asi que
+     un sid ausente o mal formado ya no cierra la puerta: se pide igual y manda el
+     servidor. Si el servidor vuelve a exigirlo (reversa EZ_ABIERTAS=), contesta
+     motivo=formato y se ve el mismo aviso de siempre. El Purchase de arriba SI
+     sigue exigiendo el sid: sin sesion no hay compra que reportar. */
+  if(sid && !/^cs_live_[A-Za-z0-9]{20,120}$/.test(sid)){ sid = null; }
   aviso('Verificando tu compra…');
   var listo = false;
   /* fetch no tiene timeout propio: un endpoint que no contesta dejaria la pagina
      en "verificando" para siempre. A los 15 s se cierra con mensaje. */
   var reloj = setTimeout(function(){ if(!listo){ listo = true; cerrado('red'); } }, 15000);
   var q = '?t=' + encodeURIComponent(EZ_T) + '&z=' + encodeURIComponent(EZ_Z) +
-          '&k=' + encodeURIComponent(EZ_K) + '&sid=' + encodeURIComponent(sid);
+          '&k=' + encodeURIComponent(EZ_K) + '&sid=' + encodeURIComponent(sid || '');
   try{
     fetch(EZ_URL + q, {cache:'no-store', credentials:'omit'})
       .then(function(r){ return r.json(); })
